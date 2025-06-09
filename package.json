@@ -1,0 +1,15 @@
+{
+  "name": "fork",
+  "version": "1.0.0",
+  "description": "recipe ",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Baton Goodnes",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.2",
+    "parcel": "^2.15.2"
+  }
+}
