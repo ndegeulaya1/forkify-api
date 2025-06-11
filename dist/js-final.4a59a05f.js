@@ -785,7 +785,6 @@ const loadResult = async function(query) {
                 image: rec.image_url
             };
         });
-        console.log(state.search.results);
         console.log(data);
     } catch (err) {
         console.log(err);

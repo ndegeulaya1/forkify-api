@@ -28,7 +28,7 @@ const data =await getJSON(`${API_URL}?search=${query}`);
 } 
   })
 
-console.log(state.search.results);
+
 console.log(data);
 
     }
