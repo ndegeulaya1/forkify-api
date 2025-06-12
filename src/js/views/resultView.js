@@ -1,0 +1,8 @@
+class resultView{
+#result;
+
+
+    renderResult(){
+
+    }
+}
