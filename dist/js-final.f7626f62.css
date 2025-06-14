@@ -528,32 +528,17 @@ body {
 
 .search-results {
   flex-direction: column;
+  justify-content: space-between;
   padding: 3rem 0;
   display: flex;
 }
 
 .results {
+  scrollbar-width: none;
+  height: 700px;
   margin-bottom: 2rem;
   list-style: none;
-}
-
-.pagination {
-  margin-top: auto;
-  padding: 0 3.5rem;
-}
-
-.pagination:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.pagination__btn--prev {
-  float: left;
-}
-
-.pagination__btn--next {
-  float: right;
+  overflow-y: scroll;
 }
 
 .copyright {
