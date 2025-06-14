@@ -1,6 +1,7 @@
 
  import * as model from './model.js';
  import recipeView  from './views/recipeViews.js';
+import resultView from './views/resultView.js';
  import searchView from './views/searchView.js';
 
 
@@ -46,10 +47,11 @@ function show(){
    const {recipe} = model.state;
 
    //handle error
- recipeView.handdleError(recipeContainer);
+ //recipeView.handdleError(recipeContainer);
 
-   //spinner
+   //spinner for recipe view
 recipeView.renderSpinner(recipeContainer);
+
       //load data 
       await model.loadRecipe(id);
 
@@ -63,14 +65,20 @@ recipeView.renderSpinner(recipeContainer);
     }
 };
 
-//control searcj result
+//control search result
 const controlSearchResult = async function(){
   try{
+
+    //spinner for result view
+resultView.renderSpinner();
     const query = searchView.getQuery();
 
     if(!query) return;
     await model.loadResult(query);
 
+
+    //render the data 
+    resultView.render(model.state.search.results)
     console.log(model.state.search.results);
     console.log('hey')
 
