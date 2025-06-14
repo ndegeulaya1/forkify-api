@@ -485,6 +485,7 @@ body {
 .results {
   list-style: none;
   margin-bottom: 2rem;
+  overflow-y: scroll;
 }
 
 .pagination {
