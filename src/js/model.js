@@ -59,7 +59,8 @@ console.log(data);
                   }
 
                   catch(err){
-                    recipeView.handdleError(`${err}☠️☠️☠️☠️☠️`);
+                    console.log(err);
+                    throw err;
                   }
       
   } 
