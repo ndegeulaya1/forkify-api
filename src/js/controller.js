@@ -18,15 +18,6 @@ import resultView from './views/resultView.js';
 ///////////////////////////////////////
 
 
-//handle navigation
-function show(){
-    const show=document.querySelector('.sidebar');
-    show.style.display='flex';
-  }
-   function hide(){
-    const hide= document.querySelector('.sidebar');
-    hide.style.display='none'
-   }
 
   
 
@@ -37,17 +28,17 @@ function show(){
 
    const showRecipe = async function() {
     try {
-
+  
       const id = window.location.hash.slice(1);
       if(!id) return;
 
-        
+        //controlServings(8);
    await model.loadRecipe(id);
 
    const {recipe} = model.state;
 
    //handle error
- //recipeView.handdleError(recipeContainer);
+ recipeView.handdleError(recipeContainer);
 
    //spinner for recipe view
 recipeView.renderSpinner(recipeContainer);
@@ -57,7 +48,8 @@ recipeView.renderSpinner(recipeContainer);
 
       //render recipe
       recipeView.render(model.state.recipe)
-         
+      
+
    
     } catch(err) {
         console.error('Error:', err); // console.error is better for errors
@@ -70,7 +62,10 @@ const controlSearchResult = async function(){
   try{
 
     //spinner for result view
-resultView.renderSpinner();
+   
+      resultView.renderSpinner();
+ 
+
     const query = searchView.getQuery();
 
     if(!query) return;
@@ -89,14 +84,22 @@ resultView.renderSpinner();
   }
 }
 
+const controlServings = function (newServings) {
+  // Update the recipe servings (in state)
+  model.updateServings(newServings);
 
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+};
 
                 
 
  const init = function(){
   recipeView.addRenderEvent(showRecipe);
   searchView.handleSearch(controlSearchResult);
+    recipeView.addHandlerUpdateServings(controlServings);
      //handle error
+     
  
 
  }
