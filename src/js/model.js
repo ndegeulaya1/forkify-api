@@ -65,4 +65,12 @@ console.log(data);
       
   } 
 
+  export const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.serving;
+    // newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
+  });
+
+  state.recipe.serving = newServings;
+};
 
