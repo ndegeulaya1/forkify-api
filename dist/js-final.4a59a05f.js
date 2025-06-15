@@ -679,24 +679,16 @@ const recipeContainer = document.querySelector('.recipe');
 // NEW API URL (instead of the one shown in the video)
 // https://forkify-api.jonas.io
 ///////////////////////////////////////
-//handle navigation
-function show() {
-    const show = document.querySelector('.sidebar');
-    show.style.display = 'flex';
-}
-function hide() {
-    const hide = document.querySelector('.sidebar');
-    hide.style.display = 'none';
-}
 ///api request
 const showRecipe = async function() {
     try {
         const id = window.location.hash.slice(1);
         if (!id) return;
+        //controlServings(8);
         await _modelJs.loadRecipe(id);
         const { recipe } = _modelJs.state;
         //handle error
-        //recipeView.handdleError(recipeContainer);
+        (0, _recipeViewsJsDefault.default).handdleError(recipeContainer);
         //spinner for recipe view
         (0, _recipeViewsJsDefault.default).renderSpinner(recipeContainer);
         //load data 
@@ -725,9 +717,16 @@ const controlSearchResult = async function() {
         throw err;
     }
 };
+const controlServings = function(newServings) {
+    // Update the recipe servings (in state)
+    _modelJs.updateServings(newServings);
+    // Update the recipe view
+    (0, _recipeViewsJsDefault.default).render(_modelJs.state.recipe);
+};
 const init = function() {
     (0, _recipeViewsJsDefault.default).addRenderEvent(showRecipe);
     (0, _searchViewJsDefault.default).handleSearch(controlSearchResult);
+    (0, _recipeViewsJsDefault.default).addHandlerUpdateServings(controlServings);
 //handle error
 };
 init();
@@ -768,6 +767,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadResult", ()=>loadResult);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
+parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helperJs = require("./helper.js");
@@ -815,6 +815,13 @@ const loadRecipe = async function(id) {
         console.log(err);
         throw err;
     }
+};
+const updateServings = function(newServings) {
+    state.recipe.ingredients.forEach((ing)=>{
+        ing.quantity = ing.quantity * newServings / state.recipe.serving;
+    // newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
+    });
+    state.recipe.serving = newServings;
 };
 
 },{"regenerator-runtime":"f6ot0","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./config.js":"2hPh4","./helper.js":"b1fwP","./views/recipeViews.js":"eC0AB"}],"f6ot0":[function(require,module,exports,__globalThis) {
@@ -1451,8 +1458,17 @@ class recipeView extends (0, _viewJsDefault.default) {
             'hashchange'
         ].forEach((ev)=>window.addEventListener(ev, hander));
     }
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener('click', (e)=>{
+            const btn = e.target.closest('.btn--update-servings');
+            if (!btn) return;
+            const updateTo = +btn.dataset.updateTo;
+            if (updateTo > 0) handler(updateTo); // Optional safety: prevent negative servings
+        });
+    }
     _returnHtml() {
         console.log(this._data);
+        console.log('Servings:', this._data.servings);
         return `
 
         
@@ -1479,19 +1495,20 @@ class recipeView extends (0, _viewJsDefault.default) {
             <span class="recipe__info-data recipe__info-data--people">${this._data.serving}</span>
             <span class="recipe__info-text">servings</span>
 
-            <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
-                </svg>
-              </button>
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
-                </svg>
-              </button>
-            </div>
+           <div class="recipe__info-buttons">
+            <button class="btn--tiny btn--update-servings" data-update-to="${this._data.serving - 1}">
+              <svg>
+                <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
+              </svg>
+            </button>
+            <button class="btn--tiny btn--update-servings" data-update-to="${this._data.serving + 1}">
+              <svg>
+                <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
+              </svg>
+            </button>
           </div>
+        </div>
+          
 
           <div class="recipe__user-generated">
             <svg>
@@ -1577,6 +1594,22 @@ class view {
         const recipeHtml = this._returnHtml();
         this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin', recipeHtml);
+    }
+    update(data) {
+        this._data = data;
+        const newMarkup = this._returnHtml();
+        const newDOM = document.createRange().createContextualFragment(newMarkup);
+        const newElements = Array.from(newDOM.querySelectorAll('*'));
+        const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+        newElements.forEach((newEl, i)=>{
+            const curEl = curElements[i];
+            // console.log(curEl, newEl.isEqualNode(curEl));
+            // Updates changed TEXT
+            if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== '') // console.log('💥', newEl.firstChild.nodeValue.trim());
+            curEl.textContent = newEl.textContent;
+            // Updates changed ATTRIBUES
+            if (!newEl.isEqualNode(curEl)) Array.from(newEl.attributes).forEach((attr)=>curEl.setAttribute(attr.name, attr.value));
+        });
     }
     _clear() {
         this._parentElement.innerHTML = '';

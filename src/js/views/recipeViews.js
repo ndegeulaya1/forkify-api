@@ -19,9 +19,21 @@ import icons from 'url:../../img/icons.svg';
         ['load','hashchange'].forEach(ev=>window.addEventListener(ev,hander));
     };
      
+ addHandlerUpdateServings(handler) {
+  this._parentElement.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn--update-servings');
+    if (!btn) return;
+
+    const updateTo = +btn.dataset.updateTo;
+    if (updateTo > 0) handler(updateTo); // Optional safety: prevent negative servings
+  });
+}
 
     _returnHtml(){
         console.log(this._data);
+
+        console.log('Servings:', this._data.servings);
+
         return `
 
         
@@ -48,19 +60,24 @@ import icons from 'url:../../img/icons.svg';
             <span class="recipe__info-data recipe__info-data--people">${this._data.serving}</span>
             <span class="recipe__info-text">servings</span>
 
-            <div class="recipe__info-buttons">
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="${icons}#icon-minus-circle"></use>
-                </svg>
-              </button>
-              <button class="btn--tiny btn--increase-servings">
-                <svg>
-                  <use href="${icons}#icon-plus-circle"></use>
-                </svg>
-              </button>
-            </div>
+           <div class="recipe__info-buttons">
+            <button class="btn--tiny btn--update-servings" data-update-to="${
+              this._data.serving - 1
+            }">
+              <svg>
+                <use href="${icons}#icon-minus-circle"></use>
+              </svg>
+            </button>
+            <button class="btn--tiny btn--update-servings" data-update-to="${
+              this._data.serving + 1
+            }">
+              <svg>
+                <use href="${icons}#icon-plus-circle"></use>
+              </svg>
+            </button>
           </div>
+        </div>
+          
 
           <div class="recipe__user-generated">
             <svg>
