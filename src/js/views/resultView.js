@@ -11,7 +11,7 @@ _errorMessage='no recipe found try another one!!!!';
 
 _returnHtml(){
 
-    console.log(this._data);
+  
 
     return this._data.map(this._returnHtmlPreview).join('');
 
