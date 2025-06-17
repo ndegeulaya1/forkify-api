@@ -4,7 +4,7 @@
 import resultView from './views/resultView.js';
 import bookmarkView from './views/bookmarkView.js';
  import searchView from './views/searchView.js';
-import addRecipeView from './views/addRecipe.js';
+import addRecipeView from './views/addRecipeView.js';
 
 
 
@@ -93,6 +93,7 @@ const controlServings = function (newServings) {
 
   // Update the recipe view
   recipeView.render(model.state.recipe);
+  console.log(model.state.recipe)
 };
 
 
@@ -107,12 +108,19 @@ const controlAddBookmark = function () {
   // 3) Render bookmarks
   bookmarkView.render(model.state.bookmarks);
 };
+
+
+const controlAddRecipe = function(newRecipe){
+  console.log(newRecipe);
+
+}
     
  const init = function(){
   recipeView.addRenderEvent(showRecipe);
   searchView.handleSearch(controlSearchResult);
     recipeView.addHandlerUpdateServings(controlServings);
     recipeView.addHandlerAddBookmark(controlAddBookmark);
+    addRecipeView.addHandleUpload(controlAddRecipe)
 
  model.loadBookmarks();
  
