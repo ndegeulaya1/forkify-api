@@ -7,16 +7,8 @@ import bookmarkView from './views/bookmarkView.js';
 import addRecipeView from './views/addRecipe.js';
 
 
-const controlAddRecipe = async function (newRecipe) {
-  try {
-    await model.uploadRecipe(newRecipe); // handle in model.js
 
-    recipeView.render(model.state.recipe); // render new recipe
-    addRecipeView.renderMessage(); // show success message
-  } catch (err) {
-    addRecipeView.renderError(err.message);
-  }
-};
+
 
 
   const recipeContainer = document.querySelector('.recipe');
