@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "recipe ",
   "scripts": {
-    "start": "parcel index.html"
-   
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Baton Goodnes",
   "license": "ISC",
