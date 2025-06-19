@@ -114,3 +114,27 @@ export const loadBookmarks = function () {
 };
 
 
+export const uploadRecipe = async function (newRecipe) {
+
+  //Extracting and Processing Ingredients
+  const ingredients = Object.entries(newRecipe)
+
+   //Filtering Ingredient Fields
+    .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+
+    // Mapping and Destructuring Values
+    .map(([_, ing]) => {
+      const [quantity, unit, description] = ing.replaceAll(' ', '').split(',');
+
+
+      //Creating Ingredient Objects
+      return {
+        quantity: quantity ? Number(quantity) : null,
+        unit,
+        description,
+      };
+    });
+
+  console.log(ingredients);
+};
+

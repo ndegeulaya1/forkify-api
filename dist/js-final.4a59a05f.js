@@ -737,7 +737,7 @@ const controlAddBookmark = function() {
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
 const controlAddRecipe = function(newRecipe) {
-    console.log(newRecipe);
+    _modelJs.uploadRecipe(newRecipe);
 };
 const init = function() {
     (0, _recipeViewsJsDefault.default).addRenderEvent(showRecipe);
@@ -791,6 +791,7 @@ parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 parcelHelpers.export(exports, "addBookmark", ()=>addBookmark);
 parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark);
 parcelHelpers.export(exports, "loadBookmarks", ()=>loadBookmarks);
+parcelHelpers.export(exports, "uploadRecipe", ()=>uploadRecipe);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helperJs = require("./helper.js");
@@ -868,6 +869,21 @@ const persistBookmarks = function() {
 const loadBookmarks = function() {
     const storage = localStorage.getItem('bookmarks');
     if (storage) state.bookmarks = JSON.parse(storage);
+};
+const uploadRecipe = async function(newRecipe) {
+    //Extracting and Processing Ingredients
+    const ingredients = Object.entries(newRecipe)//Filtering Ingredient Fields
+    .filter((entry)=>entry[0].startsWith('ingredient') && entry[1] !== '')// Mapping and Destructuring Values
+    .map(([_, ing])=>{
+        const [quantity, unit, description] = ing.replaceAll(' ', '').split(',');
+        //Creating Ingredient Objects
+        return {
+            quantity: quantity ? Number(quantity) : null,
+            unit,
+            description
+        };
+    });
+    console.log(ingredients);
 };
 
 },{"regenerator-runtime":"f6ot0","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./config.js":"2hPh4","./helper.js":"b1fwP","./views/recipeViews.js":"eC0AB"}],"f6ot0":[function(require,module,exports,__globalThis) {

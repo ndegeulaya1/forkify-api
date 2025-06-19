@@ -111,7 +111,8 @@ const controlAddBookmark = function () {
 
 
 const controlAddRecipe = function(newRecipe){
-  console.log(newRecipe);
+
+model.uploadRecipe(newRecipe)
 
 }
     
