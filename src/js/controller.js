@@ -110,9 +110,23 @@ const controlAddBookmark = function () {
 };
 
 
-const controlAddRecipe = function(newRecipe){
+const controlAddRecipe =async function(newRecipe){
 
-model.uploadRecipe(newRecipe)
+  try{
+    
+   await model.uploadRecipe(newRecipe)
+   console.log(model.state.recipe);
+   recipeView.render(model.state.recipe)
+
+
+   
+  }
+catch(err){
+  console.log('🎗️', err);
+  addRecipeView.handdleError(err.message);
+
+}
+
 
 }
     
