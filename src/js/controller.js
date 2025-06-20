@@ -1,5 +1,7 @@
 
  import * as model from './model.js';
+
+ import {MODAL_CLOSE_SEC} from './config.js'
  import recipeView  from './views/recipeViews.js';
 import resultView from './views/resultView.js';
 import bookmarkView from './views/bookmarkView.js';
@@ -116,9 +118,19 @@ const controlAddRecipe =async function(newRecipe){
     
    await model.uploadRecipe(newRecipe)
    console.log(model.state.recipe);
+
+
    recipeView.render(model.state.recipe)
 
+   //succesfull message
+  addRecipeView.renderMessage();
 
+  //rende spiner 
+  //addRecipeView.renderSpinner();
+
+    setTimeout(function () {
+      addRecipeView._addHandleHide();
+    }, MODAL_CLOSE_SEC * 1000);
    
   }
 catch(err){
