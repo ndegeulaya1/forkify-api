@@ -1,6 +1,6 @@
   import {async, keys} from 'regenerator-runtime';
-  import { API_URL } from './config.js';
-  import { getJSON } from './helper.js';
+  import { API_URL, KEY } from './config.js';
+  import { getJSON, sendJSON } from './helper.js';
 import { recipeView } from './views/recipeViews.js';
 
   
@@ -42,13 +42,10 @@ console.log(data);
   }
  
 
-  export const loadRecipe = async function(id){
-
-    try{
-        const data =await getJSON(`${API_URL}/${id}`);
-          const { recipe } = data.data; // Destructuring
+  const createRecipe = function(data){
+         const { recipe } = data.data; // Destructuring
       
-              state.recipe = {
+             return {
                   id: recipe.id,
                   title: recipe.title,
                   publisher: recipe.publisher,
@@ -57,8 +54,16 @@ console.log(data);
                   ingredients: recipe.ingredients,
                   sourceUrl: recipe.source_url,
                   image: recipe.image_url,
+                  ...(recipe.key && { key: recipe.key }),
               };
+  }
 
+  export const loadRecipe = async function(id){
+
+    try{
+        const data =await getJSON(`${API_URL}/${id}`);
+     
+state.recipe = createRecipe(data);
 
               if(state.bookmarks.some(bookmark=>bookmark.id===id)){
                 state.recipe.bookmarked=true;
@@ -114,6 +119,8 @@ export const loadBookmarks = function () {
 };
 
 
+
+//receive data for the new arecipe
 export const uploadRecipe = async function (newRecipe) {
 
   //Extracting and Processing Ingredients
@@ -123,9 +130,19 @@ export const uploadRecipe = async function (newRecipe) {
     .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
 
     // Mapping and Destructuring Values
-    .map(([_, ing]) => {
-      const [quantity, unit, description] = ing.replaceAll(' ', '').split(',');
+    .map(ing => {
+      const ingArr = ing[1].replaceAll(' ', '').split(',');
 
+      if(ingArr.length!==3){
+        throw new Error(
+          'Wrong ingredient, use the correct format'
+        );
+        
+      }
+
+
+     
+        const [quantity, unit, description] = ingArr;
 
       //Creating Ingredient Objects
       return {
@@ -135,6 +152,23 @@ export const uploadRecipe = async function (newRecipe) {
       };
     });
 
-  console.log(ingredients);
+ 
+
+  const recipe = {
+   
+                  title: newRecipe.title,
+                  publisher: newRecipe.publisher,
+                  servings: newRecipe.servings,
+                  cooking_time: newRecipe.cookingTime,
+                  ingredients,
+                  source_url: newRecipe.sourceUrl,
+                  image_url: newRecipe.image,
+  }
+
+  const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe)
+   console.log(data);
+   state.recipe = createRecipe(data);
+   addBookmark(state.recipe)
+
 };
 
