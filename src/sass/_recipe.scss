@@ -177,3 +177,10 @@
     font-weight: 700;
   }
 }
+
+
+.bookmarks__list{
+  overflow-y: scroll;
+  height: 60rem;
+  scrollbar-width: 1px;
+}

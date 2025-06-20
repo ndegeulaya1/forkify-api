@@ -1,4 +1,4 @@
-3696
+3700
 95E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\markdown-ansi\src\markdown-ansi.js133938959274829676 0
 114E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\test\integration\workerfarm\reverse-handle.js133938959359673519 0
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\regions\BY.js133938959400772485 0
@@ -22,7 +22,7 @@
 95E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\core\src\serializerCore.browser.js133938959414037306 0
 75E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\logger\LICENSE133938959258223525 0
 94E:\load-to-js-with-tailwindcss\js-final\node_modules\source-map-js\lib\source-map-generator.js133938974797785355 0
-44E:\load-to-js-with-tailwindcss\js-final\dist133949271228482819 1
+44E:\load-to-js-with-tailwindcss\js-final\dist133949302014233521 1
 74E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\profiler\test133938959320002424 1
 70E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\utils\src133938959399810792 1
 68E:\load-to-js-with-tailwindcss\js-final\node_modules\lmdb\index.d.ts133938959415347471 0
@@ -138,7 +138,7 @@
 72E:\load-to-js-with-tailwindcss\js-final\node_modules\parcel\package.json133938959303677124 0
 61E:\load-to-js-with-tailwindcss\js-final\src\sass\_recipe.scss133906424434623438 0
 89E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\hidden.js133938959500975857 0
-69E:\load-to-js-with-tailwindcss\js-final\src\js\views\addRecipeView.js133949258766146222 0
+69E:\load-to-js-with-tailwindcss\js-final\src\js\views\addRecipeView.js133949299779651686 0
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\transformer-postcss\src133938959313257894 1
 56E:\load-to-js-with-tailwindcss\js-final\src\js\config.js133949255921590379 0
 81E:\load-to-js-with-tailwindcss\js-final\node_modules\weak-lru-cache\tests\test.js133938959294392973 0
@@ -148,7 +148,7 @@
 102E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\package-manager\src\NodePackageManager.js133938959343665680 0
 100E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\wasm-relaxed-simd.js133938959586691932 0
 88E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\woff2.js133938959589952301 0
-55E:\load-to-js-with-tailwindcss\js-final\src\js\model.js133949150242064718 0
+55E:\load-to-js-with-tailwindcss\js-final\src\js\model.js133949289926839239 0
 52E:\load-to-js-with-tailwindcss\js-final\src\js\views133946684924757260 1
 65E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite133938959593332973 1
 99E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-focus-within.js133938959419112273 0
@@ -159,11 +159,11 @@
 63E:\load-to-js-with-tailwindcss\js-final\node_modules\fill-range133938959275750622 1
 107E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\test\integration\workerfarm\ipc-pid.js133938959348120935 0
 71E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\types\LICENSE133938959257502060 0
-68E:\load-to-js-with-tailwindcss\js-final\src\js\views\bookmarkView.js133946771336164166 0
+68E:\load-to-js-with-tailwindcss\js-final\src\js\views\bookmarkView.js133949299838332191 0
 99E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-text-justify.js133938959438893845 0
-67E:\load-to-js-with-tailwindcss\js-final\src\js\views\recipeViews.js133945823015539687 0
+67E:\load-to-js-with-tailwindcss\js-final\src\js\views\recipeViews.js133949299898656238 0
 88E:\load-to-js-with-tailwindcss\js-final\node_modules\fractional\releases\fraction-0.1.js133941203531610011 0
-66E:\load-to-js-with-tailwindcss\js-final\src\js\views\resultView.js133945820194093639 0
+66E:\load-to-js-with-tailwindcss\js-final\src\js\views\resultView.js133949299962528339 0
 98E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\_\_set_prototype_of\package.json133938959482638301 0
 66E:\load-to-js-with-tailwindcss\js-final\src\js\views\searchView.js133944101959138399 0
 85E:\load-to-js-with-tailwindcss\js-final\node_modules\lmdb\node_modules\node-addon-api133938959341564343 1
@@ -173,7 +173,7 @@
 99E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-env-function.js133938959415785924 0
 76E:\load-to-js-with-tailwindcss\js-final\node_modules\sass\types\compile.d.ts133938974954626913 0
 75E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\runtime-js\src133938959351001241 1
-60E:\load-to-js-with-tailwindcss\js-final\src\js\views\view.js133949266082641482 0
+60E:\load-to-js-with-tailwindcss\js-final\src\js\views\view.js133949299710461852 0
 85E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\_\_set_prototype_of133938959482633239 1
 103E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\transformer-babel\src\remapAstLocations.js133938959334937395 0
 74E:\load-to-js-with-tailwindcss\js-final\node_modules\detect-libc\README.md133938959273976650 0
@@ -561,6 +561,7 @@
 74E:\load-to-js-with-tailwindcss\js-final\node_modules\picomatch\lib\scan.js133938959297703868 0
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\msgpackr\dist\index-no-eval.cjs133938959275252908 0
 87E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\heif.js133938959500931563 0
+63E:\load-to-js-with-tailwindcss\js-final\dist\icons.7bd9dd61.svg133949299965840253 0
 70E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\utils\lib133938959400820784 1
 93E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\src\_async_to_generator.mjs133938959497583167 0
 89E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\canvas.js133938959401706570 0
@@ -2044,7 +2045,7 @@
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\regions\VC.js133938959583128637 0
 87E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\package-manager\index.d.ts133938959369902259 0
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\regions\VE.js133938959583174463 0
-69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.61a50e10.js.map133949270677178733 0
+69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.61a50e10.js.map133949299966259144 0
 118E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\transformer-react-refresh-wrap\src\helpers\.eslintrc.json133938959303870727 0
 84E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\regions\VI.js133938959586102061 0
 94E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\mediasource.js133938959524373026 0
@@ -2213,7 +2214,7 @@
 99E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-not-sel-list.js133938959427292758 0
 94E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-opacity.js133938959427326290 0
 103E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-overflow-overlay.js133938959428137738 0
-63E:\load-to-js-with-tailwindcss\js-final\dist\icons.21bad73c.svg133949270678520352 0
+63E:\load-to-js-with-tailwindcss\js-final\dist\icons.21bad73c.svg133949299965840253 0
 95E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-overflow.js133938959428162811 0
 87E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\wasm.js133938959587456521 0
 106E:\load-to-js-with-tailwindcss\js-final\node_modules\caniuse-lite\data\features\css-overscroll-behavior.js133938959431611286 0
@@ -2522,6 +2523,7 @@
 96E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\lib\threads\ThreadsChild.js133938959359836195 0
 90E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\src\_to_property_key.mjs133938959512871833 0
 76E:\load-to-js-with-tailwindcss\js-final\node_modules\browserslist\browser.js133938959262972027 0
+69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.358e35e5.js.map133949285118123214 0
 90E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\_\_inherits\package.json133938959474408103 0
 73E:\load-to-js-with-tailwindcss\js-final\node_modules\browserslist\node.js133938959296417656 0
 102E:\load-to-js-with-tailwindcss\js-final\node_modules\@swc\helpers\_\_class_static_private_field_update133938959447439842 1
@@ -3037,6 +3039,7 @@
 97E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\src\process\ProcessWorker.js133938959358666623 0
 83E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\lib\backend.js133938959286792642 0
 79E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\lib\bus.js133938959300926549 0
+65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.358e35e5.js133949285117947652 0
 81E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\lib\child.js133938959312958596 0
 86E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\workers\lib\childState.js133938959318839746 0
 80E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\utils\src\schema.js133938959396056098 0
@@ -3406,7 +3409,7 @@
 89E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\package-manager\src\utils.js133938959350204860 0
 87E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\optimizer-swc\package.json133938959285818288 0
 78E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\optimizer-swc\src133938959274769828 1
-62E:\load-to-js-with-tailwindcss\js-final\dist\logo.726d37a8.png133949270676615112 0
+62E:\load-to-js-with-tailwindcss\js-final\dist\logo.726d37a8.png133949299965860168 0
 92E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\node-resolver-core\package.json133938959303649136 0
 94E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\optimizer-swc\lib\SwcOptimizer.js133938959267683123 0
 82E:\load-to-js-with-tailwindcss\js-final\node_modules\@parcel\optimizer-svg\LICENSE133938959258203577 0
@@ -3626,7 +3629,7 @@
 106E:\load-to-js-with-tailwindcss\js-final\node_modules\@msgpackr-extract\msgpackr-extract-win32-x64\index.js133938959254975435 0
 112E:\load-to-js-with-tailwindcss\js-final\node_modules\@msgpackr-extract\msgpackr-extract-win32-x64\node.napi.node133938959303704233 0
 107E:\load-to-js-with-tailwindcss\js-final\node_modules\@msgpackr-extract\msgpackr-extract-win32-x64\README.md133938959272350301 0
-63E:\load-to-js-with-tailwindcss\js-final\dist\icons.c5b0f01c.svg133946265073590412 0
+63E:\load-to-js-with-tailwindcss\js-final\dist\icons.c5b0f01c.svg133949302014228168 0
 82E:\load-to-js-with-tailwindcss\js-final\node_modules\@mischnic\json-sourcemap\dist133938959294312357 1
 85E:\load-to-js-with-tailwindcss\js-final\node_modules\@mischnic\json-sourcemap\LICENSE133938959258163617 0
 91E:\load-to-js-with-tailwindcss\js-final\node_modules\@mischnic\json-sourcemap\dist\index.js133938959290170051 0
@@ -3671,19 +3674,20 @@
 64E:\load-to-js-with-tailwindcss\js-final\node_modules\.bin\semver133938965297436695 0
 68E:\load-to-js-with-tailwindcss\js-final\node_modules\.bin\semver.cmd133938965297436695 0
 68E:\load-to-js-with-tailwindcss\js-final\node_modules\.bin\semver.ps1133938965297436695 0
-63E:\load-to-js-with-tailwindcss\js-final\dist\icons.0809ef97.svg133949270678520352 0
-55E:\load-to-js-with-tailwindcss\js-final\dist\index.html133949266088093154 0
+63E:\load-to-js-with-tailwindcss\js-final\dist\icons.0809ef97.svg133949289216478934 0
+63E:\load-to-js-with-tailwindcss\js-final\dist\icons.b8a86f0c.svg133949299965840253 0
+55E:\load-to-js-with-tailwindcss\js-final\dist\index.html133949299965850202 0
 69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.0a7dd2ab.js.map133946265073728398 0
-66E:\load-to-js-with-tailwindcss\js-final\dist\js-final.2583be0c.css133949270678520352 0
-70E:\load-to-js-with-tailwindcss\js-final\dist\js-final.2583be0c.css.map133949270678620093 0
+66E:\load-to-js-with-tailwindcss\js-final\dist\js-final.2583be0c.css133949299965850202 0
+70E:\load-to-js-with-tailwindcss\js-final\dist\js-final.2583be0c.css.map133949299966294257 0
 78E:\load-to-js-with-tailwindcss\js-final\dist\js-final.2583be0c.css.map.9048.67133949134778448551 0
 65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.3464ddca.js133940369312110199 0
 65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.450048ad.js133946265073601350 0
-65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.4a59a05f.js133949271228093864 0
+65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.4a59a05f.js133949299965840253 0
 74E:\load-to-js-with-tailwindcss\js-final\dist\js-final.4a59a05f.js.11624.2s133945581435586161 0
-69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.4a59a05f.js.map133949271228203597 0
+69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.4a59a05f.js.map133949299966259144 0
 70E:\load-to-js-with-tailwindcss\js-final\dist\js-final.58923255.css.map133940206372981564 0
-65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.61a50e10.js133949270677148814 0
+65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.61a50e10.js133949299965840253 0
 74E:\load-to-js-with-tailwindcss\js-final\dist\js-final.61a50e10.js.11624.2t133945581435596134 0
 65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.62406edb.js133940369312110199 0
 66E:\load-to-js-with-tailwindcss\js-final\dist\js-final.6a445e53.css133940206372916162 0
@@ -3693,5 +3697,5 @@
 65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.9733416a.js133944149977526791 0
 69E:\load-to-js-with-tailwindcss\js-final\dist\js-final.9733416a.js.map133944149979537982 0
 65E:\load-to-js-with-tailwindcss\js-final\dist\js-final.dccbc7a7.js133940206372910718 0
-66E:\load-to-js-with-tailwindcss\js-final\dist\js-final.f7626f62.css133949270678520352 0
-70E:\load-to-js-with-tailwindcss\js-final\dist\js-final.f7626f62.css.map133949270678630079 0
+66E:\load-to-js-with-tailwindcss\js-final\dist\js-final.f7626f62.css133949299965850202 0
+70E:\load-to-js-with-tailwindcss\js-final\dist\js-final.f7626f62.css.map133949299966294257 0

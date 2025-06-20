@@ -713,6 +713,12 @@ body {
   font-weight: 700;
 }
 
+.bookmarks__list {
+  scrollbar-width: 1px;
+  height: 60rem;
+  overflow-y: scroll;
+}
+
 .add-recipe-window {
   z-index: 1000;
   background-color: #fff;
