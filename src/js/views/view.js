@@ -1,5 +1,6 @@
 
-import icons from '../../img/icons.svg';
+import icons from '../../img/icons.svg?inline';
+
 export default class view {
 
 

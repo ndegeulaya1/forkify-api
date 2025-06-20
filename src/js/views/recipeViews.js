@@ -1,5 +1,6 @@
  import view from './view.js';
-import icons from '../../img/icons.svg';
+import icons from '../../img/icons.svg?inline';
+
 
 
 
