@@ -736,8 +736,15 @@ const controlAddBookmark = function() {
     // 3) Render bookmarks
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
 };
-const controlAddRecipe = function(newRecipe) {
-    _modelJs.uploadRecipe(newRecipe);
+const controlAddRecipe = async function(newRecipe) {
+    try {
+        await _modelJs.uploadRecipe(newRecipe);
+        console.log(_modelJs.state.recipe);
+        (0, _recipeViewsJsDefault.default).render(_modelJs.state.recipe);
+    } catch (err) {
+        console.log("\uD83C\uDF97\uFE0F", err);
+        (0, _addRecipeViewJsDefault.default).handdleError(err.message);
+    }
 };
 const init = function() {
     (0, _recipeViewsJsDefault.default).addRenderEvent(showRecipe);
@@ -822,20 +829,26 @@ const loadResult = async function(query) {
         throw err;
     }
 };
+const createRecipe = function(data) {
+    const { recipe } = data.data; // Destructuring
+    return {
+        id: recipe.id,
+        title: recipe.title,
+        publisher: recipe.publisher,
+        serving: recipe.servings,
+        cooking_time: recipe.cooking_time,
+        ingredients: recipe.ingredients,
+        sourceUrl: recipe.source_url,
+        image: recipe.image_url,
+        ...recipe.key && {
+            key: recipe.key
+        }
+    };
+};
 const loadRecipe = async function(id) {
     try {
         const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}/${id}`);
-        const { recipe } = data.data; // Destructuring
-        state.recipe = {
-            id: recipe.id,
-            title: recipe.title,
-            publisher: recipe.publisher,
-            serving: recipe.servings,
-            cooking_time: recipe.cooking_time,
-            ingredients: recipe.ingredients,
-            sourceUrl: recipe.source_url,
-            image: recipe.image_url
-        };
+        state.recipe = createRecipe(data);
         if (state.bookmarks.some((bookmark)=>bookmark.id === id)) state.recipe.bookmarked = true;
         else state.recipe.bookmarked = false;
     } catch (err) {
@@ -874,8 +887,10 @@ const uploadRecipe = async function(newRecipe) {
     //Extracting and Processing Ingredients
     const ingredients = Object.entries(newRecipe)//Filtering Ingredient Fields
     .filter((entry)=>entry[0].startsWith('ingredient') && entry[1] !== '')// Mapping and Destructuring Values
-    .map(([_, ing])=>{
-        const [quantity, unit, description] = ing.replaceAll(' ', '').split(',');
+    .map((ing)=>{
+        const ingArr = ing[1].replaceAll(' ', '').split(',');
+        if (ingArr.length !== 3) throw new Error('Wrong ingredient, use the correct format');
+        const [quantity, unit, description] = ingArr;
         //Creating Ingredient Objects
         return {
             quantity: quantity ? Number(quantity) : null,
@@ -883,7 +898,19 @@ const uploadRecipe = async function(newRecipe) {
             description
         };
     });
-    console.log(ingredients);
+    const recipe = {
+        title: newRecipe.title,
+        publisher: newRecipe.publisher,
+        servings: newRecipe.servings,
+        cooking_time: newRecipe.cookingTime,
+        ingredients,
+        source_url: newRecipe.sourceUrl,
+        image_url: newRecipe.image
+    };
+    const data = await (0, _helperJs.sendJSON)(`${(0, _configJs.API_URL)}?key=${(0, _configJs.KEY)}`, recipe);
+    console.log(data);
+    state.recipe = createRecipe(data);
+    addBookmark(state.recipe);
 };
 
 },{"regenerator-runtime":"f6ot0","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./config.js":"2hPh4","./helper.js":"b1fwP","./views/recipeViews.js":"eC0AB"}],"f6ot0":[function(require,module,exports,__globalThis) {
@@ -1475,12 +1502,15 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+parcelHelpers.export(exports, "KEY", ()=>KEY);
 const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes';
+const KEY = '95c788ed-d5ef-4baa-a5e5-f334a88989a7';
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"b1fwP":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
+parcelHelpers.export(exports, "sendJSON", ()=>sendJSON);
 const timeout = function(sec) {
     return new Promise(function(reject) {
         setTimeout(function() {
@@ -1491,6 +1521,26 @@ const timeout = function(sec) {
 const getJSON = async function(url) {
     try {
         const response = fetch(url);
+        const res = await Promise.race([
+            response,
+            timeout(10)
+        ]);
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message}`);
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+const sendJSON = async function(url, uploadData) {
+    try {
+        const response = fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(uploadData)
+        });
         const res = await Promise.race([
             response,
             timeout(10)
