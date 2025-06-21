@@ -68,13 +68,17 @@ const controlSearchResult = async function(){
   try{
 
     //spinner for result view
-   
+    
       resultView.renderSpinner();
+     
  
 
     const query = searchView.getQuery();
 
-    if(!query) return;
+    if (!query) {
+  resultView.handdleError('Please enter a srecipe to search');
+  return;
+}
     await model.loadResult(query);
 
 
@@ -123,20 +127,31 @@ const controlAddRecipe =async function(newRecipe){
    recipeView.render(model.state.recipe)
 
    //succesfull message
-  addRecipeView.renderMessage();
+    
+  //addRecipeView.renderMessage();
+
 
   //rende spiner 
   //addRecipeView.renderSpinner();
 
+  //render bookmark
+  bookmarkView.render(model.state.bookmarks);
+
     setTimeout(function () {
-      addRecipeView._addHandleHide();
-    }, MODAL_CLOSE_SEC * 1000);
+      addRecipeView.toogleWindow();
+       
+    }, MODAL_CLOSE_SEC * 400);
+
+    window.history.pushState(null, '' ,`${model.state.recipe.id}`);
    
   }
-catch(err){
-  console.log('🎗️', err);
-  addRecipeView.handdleError(err.message);
+  
 
+
+catch(err){
+
+  addRecipeView.handdleError(err.message);
+addRecipeView._clear();
 }
 
 
@@ -152,6 +167,7 @@ catch(err){
  model.loadBookmarks();
  
  //handle error
+ 
      
   bookmarkView.render(model.state.bookmarks);
 

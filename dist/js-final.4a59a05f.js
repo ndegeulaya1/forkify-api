@@ -712,7 +712,10 @@ const controlSearchResult = async function() {
         //spinner for result view
         (0, _resultViewJsDefault.default).renderSpinner();
         const query = (0, _searchViewJsDefault.default).getQuery();
-        if (!query) return;
+        if (!query) {
+            (0, _resultViewJsDefault.default).handdleError('Please enter a srecipe to search');
+            return;
+        }
         await _modelJs.loadResult(query);
         //render the data 
         (0, _resultViewJsDefault.default).render(_modelJs.state.search.results);
@@ -743,15 +746,18 @@ const controlAddRecipe = async function(newRecipe) {
         console.log(_modelJs.state.recipe);
         (0, _recipeViewsJsDefault.default).render(_modelJs.state.recipe);
         //succesfull message
-        (0, _addRecipeViewJsDefault.default).renderMessage();
+        //addRecipeView.renderMessage();
         //rende spiner 
         //addRecipeView.renderSpinner();
+        //render bookmark
+        (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
         setTimeout(function() {
-            (0, _addRecipeViewJsDefault.default)._addHandleHide();
-        }, (0, _configJs.MODAL_CLOSE_SEC) * 1000);
+            (0, _addRecipeViewJsDefault.default).toogleWindow();
+        }, (0, _configJs.MODAL_CLOSE_SEC) * 400);
+        window.history.pushState(null, '', `${_modelJs.state.recipe.id}`);
     } catch (err) {
-        console.log("\uD83C\uDF97\uFE0F", err);
         (0, _addRecipeViewJsDefault.default).handdleError(err.message);
+        (0, _addRecipeViewJsDefault.default)._clear();
     }
 };
 const init = function() {
@@ -822,13 +828,16 @@ const state = {
 const loadResult = async function(query) {
     try {
         state.search.query = query;
-        const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}?search=${query}`);
+        const data = await (0, _helperJs.getJSON)(`${(0, _configJs.API_URL)}?search=${query}&key=${(0, _configJs.KEY)}`);
         state.search.results = data.data.recipes.map((rec)=>{
             return {
                 id: rec.id,
                 title: rec.title,
                 publisher: rec.publisher,
-                image: rec.image_url
+                image: rec.image_url,
+                ...rec.key && {
+                    key: rec.key
+                }
             };
         });
         console.log(data);
@@ -897,7 +906,6 @@ const uploadRecipe = async function(newRecipe) {
     .filter((entry)=>entry[0].startsWith('ingredient') && entry[1] !== '')// Mapping and Destructuring Values
     .map((ing)=>{
         const ingArr = ing[1].replaceAll(' ', '').split(',');
-        if (ingArr.length !== 3) throw new Error('Wrong ingredient, use the correct format');
         const [quantity, unit, description] = ingArr;
         //Creating Ingredient Objects
         return {
@@ -1596,7 +1604,7 @@ class recipeView extends (0, _viewJsDefault.default) {
         });
     }
     _returnHtml() {
-        console.log('Servings:', this._data.servings);
+        console.log(this._data);
         return `
 
         
@@ -1638,7 +1646,11 @@ class recipeView extends (0, _viewJsDefault.default) {
         </div>
           
 
-        
+          <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
+          <svg>
+            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+          </svg>
+        </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
               <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? '-fill' : ''}"></use>
@@ -1650,32 +1662,36 @@ class recipeView extends (0, _viewJsDefault.default) {
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
 
-          ${this._data.ingredients.map((ing)=>{
+${this._data.ingredients?.filter((ing)=>ing && ing.description).map((ing)=>{
+            let quantity = '';
+            try {
+                if (ing.quantity) {
+                    const frac = new Fraction(ing.quantity);
+                    const whole = Math.floor(frac.numerator / frac.denominator);
+                    const remainder = frac.numerator % frac.denominator;
+                    quantity = remainder === 0 ? `${whole}` : whole === 0 ? `${remainder}/${frac.denominator}` : `${whole} ${remainder}/${frac.denominator}`;
+                }
+            } catch (err) {
+                console.error('Invalid quantity for ingredient:', ing.quantity);
+            }
             return `
-              <li class="recipe__ingredient">
-              <svg class="recipe__icon">
-                <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">${ing.quantity}</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">${ing.unit}</span>
-               ${ing.description}
-              </div>
-            </li>
-            `;
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">${quantity}</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">${ing.unit ?? ''}</span>
+          ${ing.description}
+        </div>
+      </li>
+    `;
         }).join('')}
+
+
           
 
-            <li class="recipe__ingredient">
-              <svg class="recipe__icon">
-                <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">0.5</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">cup</span>
-                ricotta cheese
-              </div>
-            </li>
+           
           </ul>
         </div>
 
@@ -1750,6 +1766,7 @@ class view {
         this._parentElement.insertAdjacentHTML('afterbegin', errorHTML);
     }
     renderSpinner = function() {
+        this._clear();
         const spanner = `
         <div class="spinner">
             <svg>
@@ -1794,7 +1811,9 @@ class resultView extends (0, _viewJsDefault.default) {
         return this._data.map(this._returnHtmlPreview).join('');
     }
     _returnHtmlPreview(result) {
+        console.log(result);
         return `
+
      <li class="preview">
             <a class="preview__link" href="#${result.id}">
               <figure class="preview__fig">
@@ -1805,7 +1824,13 @@ class resultView extends (0, _viewJsDefault.default) {
                 <p class="preview__publisher">${result.publisher}</p>
                 
               </div>
+               <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
+          <svg>
+            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+          </svg>
+        </div>
             </a>
+           
           </li>
     `;
     }
@@ -1860,6 +1885,13 @@ class bookmarkView extends (0, _viewJsDefault.default) {
                    <p class="preview__publisher">${result.publisher}</p>
                    
                  </div>
+
+                       </div>
+                                <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
+                           <svg>
+                             <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
+                           </svg>
+                         </div>
                </a>
              </li>
     `;
@@ -1872,7 +1904,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-var _iconsSvg = require("../../img/icons.svg");
+var _iconsSvg = require("url:../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class addRecipeView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector('.upload');
@@ -1880,9 +1912,10 @@ class addRecipeView extends (0, _viewJsDefault.default) {
     _window = document.querySelector('.add-recipe-window');
     _btnClose = document.querySelector('.btn--close-modal');
     _btnOpen = document.querySelector('.nav__btn--add-recipe');
-    _message = -'recipe uploded succesful';
+    _message = 'recipe uploded succesful';
     constructor(){
         super();
+        this._btnOpen = document.querySelectorAll('.nav__btn--add-recipe');
         this._addHandleShow();
         this._addHandleHide();
     }
@@ -1891,7 +1924,7 @@ class addRecipeView extends (0, _viewJsDefault.default) {
         this._overlay.classList.toggle('hidden');
     }
     _addHandleShow() {
-        this._btnOpen.addEventListener('click', this.toogleWindow.bind(this));
+        this._btnOpen.forEach((btn)=>btn.addEventListener('click', this.toogleWindow.bind(this)));
     }
     _addHandleHide() {
         this._btnClose.addEventListener('click', this.toogleWindow.bind(this));
@@ -1913,6 +1946,6 @@ class addRecipeView extends (0, _viewJsDefault.default) {
 }
 exports.default = new addRecipeView();
 
-},{"./view.js":"2kjY2","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","../../img/icons.svg":"d6UCS"}],"d6UCS":[function() {},{}]},["5DuvQ","7dWZ8"], "7dWZ8", "parcelRequire2e0c", {}, "./", "/")
+},{"./view.js":"2kjY2","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","url:../../img/icons.svg":"fd0vu"}]},["5DuvQ","7dWZ8"], "7dWZ8", "parcelRequire2e0c", {}, "./", "/")
 
 //# sourceMappingURL=js-final.4a59a05f.js.map

@@ -18,7 +18,7 @@ import { recipeView } from './views/recipeViews.js';
    export const loadResult = async function(query){
     try{
         state.search.query=query;
-const data =await getJSON(`${API_URL}?search=${query}`);
+const data =await getJSON(`${API_URL}?search=${query}&key=${KEY}`);
 
 
   state.search.results = data.data.recipes.map(rec=>{
@@ -27,6 +27,7 @@ const data =await getJSON(`${API_URL}?search=${query}`);
                   title: rec.title,
                   publisher: rec.publisher,
                   image: rec.image_url,
+                   ...(rec.key && { key: rec.key }),
 } 
   })
 
@@ -54,7 +55,7 @@ console.log(data);
                   ingredients: recipe.ingredients,
                   sourceUrl: recipe.source_url,
                   image: recipe.image_url,
-                  ...(recipe.key && { key: recipe.key }),
+                   ...(recipe.key && { key: recipe.key }),
               };
   }
 
@@ -133,12 +134,7 @@ export const uploadRecipe = async function (newRecipe) {
     .map(ing => {
       const ingArr = ing[1].replaceAll(' ', '').split(',');
 
-      if(ingArr.length!==3){
-        throw new Error(
-          'Wrong ingredient, use the correct format'
-        );
-        
-      }
+   
 
 
      
@@ -165,7 +161,7 @@ export const uploadRecipe = async function (newRecipe) {
                   image_url: newRecipe.image,
   }
 
-  const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe)
+  const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
    console.log(data);
    state.recipe = createRecipe(data);
    addBookmark(state.recipe)

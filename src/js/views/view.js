@@ -73,6 +73,7 @@ export default class view {
   
      
        renderSpinner = function(){
+        this._clear();
       const spanner =`
         <div class="spinner">
             <svg>

@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  color: #615551;
+  color: #2e140b;
   background-image: linear-gradient(to bottom right, #fbdb89, #f48982);
   background-repeat: no-repeat;
   background-size: cover;
@@ -40,7 +40,7 @@ body {
   margin: 4vw auto;
   display: grid;
   overflow: hidden;
-  box-shadow: 0 2rem 6rem .5rem #61555133;
+  box-shadow: 0 2rem 6rem .5rem #2e140b33;
 }
 
 @media only screen and (width <= 78.15em) {
@@ -215,7 +215,7 @@ body {
 }
 
 .link:link, .link:visited {
-  color: #918581;
+  color: #3a3230;
 }
 
 .spinner {
@@ -304,7 +304,7 @@ body {
 
 .search:focus-within {
   transform: translateY(-2px);
-  box-shadow: 0 .7rem 3rem #61555114;
+  box-shadow: 0 .7rem 3rem #2e140b14;
 }
 
 .search__field {
@@ -408,7 +408,7 @@ body {
   transition: all .5s .2s;
   position: absolute;
   right: -2.5rem;
-  box-shadow: 0 .8rem 5rem 2rem #6155511a;
+  box-shadow: 0 .8rem 5rem 2rem #2e140b1a;
 }
 
 .bookmarks__list {
@@ -502,7 +502,7 @@ body {
 }
 
 .preview__publisher {
-  color: #918581;
+  color: #3a3230;
   text-transform: uppercase;
   font-size: 1.15rem;
   font-weight: 600;
@@ -542,14 +542,14 @@ body {
 }
 
 .copyright {
-  color: #918581;
+  color: #3a3230;
   margin-top: 4rem;
   padding: 0 3.5rem;
   font-size: 1.2rem;
 }
 
 .copyright .twitter-link:link, .copyright .twitter-link:visited {
-  color: #918581;
+  color: #3a3230;
 }
 
 .recipe {
@@ -564,7 +564,7 @@ body {
 
 .recipe__fig:before {
   content: "";
-  opacity: .6;
+  opacity: .1;
   background-image: linear-gradient(to bottom right, #fbdb89, #f48982);
   width: 100%;
   height: 100%;
@@ -704,7 +704,7 @@ body {
 
 .recipe__directions-text {
   text-align: center;
-  color: #918581;
+  color: #3a3230;
   margin-bottom: 3.5rem;
   font-size: 1.7rem;
 }
@@ -714,7 +714,7 @@ body {
 }
 
 .bookmarks__list {
-  scrollbar-width: 1px;
+  scroll-behavior: smooth;
   height: 60rem;
   overflow-y: scroll;
 }

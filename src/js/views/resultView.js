@@ -19,7 +19,9 @@ _returnHtml(){
    
 }
  _returnHtmlPreview(result){
+   console.log(result);
  return`
+
      <li class="preview">
             <a class="preview__link" href="#${result.id}">
               <figure class="preview__fig">
@@ -30,7 +32,13 @@ _returnHtml(){
                 <p class="preview__publisher">${result.publisher}</p>
                 
               </div>
+               <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
+          <svg>
+            <use href="${icons}#icon-user"></use>
+          </svg>
+        </div>
             </a>
+           
           </li>
     `
  }

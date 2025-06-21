@@ -41,7 +41,7 @@ addHandlerAddBookmark(handler) {
     _returnHtml(){
         
 
-        console.log('Servings:', this._data.servings);
+        console.log( this._data);
 
         return `
 
@@ -88,7 +88,11 @@ addHandlerAddBookmark(handler) {
         </div>
           
 
-        
+          <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
+          <svg>
+            <use href="${icons}#icon-user"></use>
+          </svg>
+        </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
               <use href="${icons}#icon-bookmark${this._data.bookmarked? '-fill': ''}"></use>
@@ -100,32 +104,45 @@ addHandlerAddBookmark(handler) {
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
 
-          ${this._data.ingredients.map(ing=>{
-            return `
-              <li class="recipe__ingredient">
-              <svg class="recipe__icon">
-                <use href="${icons}#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">${ing.quantity}</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">${ing.unit}</span>
-               ${ing.description}
-              </div>
-            </li>
-            `
-          }).join('')}
+${this._data.ingredients
+  ?.filter(ing => ing && ing.description)
+  .map(ing => {
+    let quantity = '';
+    try {
+      if (ing.quantity) {
+        const frac = new Fraction(ing.quantity);
+        const whole = Math.floor(frac.numerator / frac.denominator);
+        const remainder = frac.numerator % frac.denominator;
+
+        quantity =
+          remainder === 0
+            ? `${whole}`
+            : whole === 0
+            ? `${remainder}/${frac.denominator}`
+            : `${whole} ${remainder}/${frac.denominator}`;
+      }
+    } catch (err) {
+      console.error('Invalid quantity for ingredient:', ing.quantity);
+    }
+
+    return `
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${icons}#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">${quantity}</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">${ing.unit ?? ''}</span>
+          ${ing.description}
+        </div>
+      </li>
+    `;
+  }).join('')}
+
+
           
 
-            <li class="recipe__ingredient">
-              <svg class="recipe__icon">
-                <use href="${icons}#icon-check"></use>
-              </svg>
-              <div class="recipe__quantity">0.5</div>
-              <div class="recipe__description">
-                <span class="recipe__unit">cup</span>
-                ricotta cheese
-              </div>
-            </li>
+           
           </ul>
         </div>
 
