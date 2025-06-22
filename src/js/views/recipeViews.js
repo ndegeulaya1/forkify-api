@@ -89,9 +89,10 @@ addHandlerAddBookmark(handler) {
           
 
           <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
-          <svg>
-            <use href="${icons}#icon-user"></use>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+
         </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
@@ -120,6 +121,8 @@ ${this._data.ingredients
             : whole === 0
             ? `${remainder}/${frac.denominator}`
             : `${whole} ${remainder}/${frac.denominator}`;
+
+            
       }
     } catch (err) {
       console.error('Invalid quantity for ingredient:', ing.quantity);
@@ -127,9 +130,10 @@ ${this._data.ingredients
 
     return `
       <li class="recipe__ingredient">
-        <svg class="recipe__icon">
-          <use href="${icons}#icon-check"></use>
-        </svg>
+       <svg  class="recipe__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
         <div class="recipe__quantity">${quantity}</div>
         <div class="recipe__description">
           <span class="recipe__unit">${ing.unit ?? ''}</span>

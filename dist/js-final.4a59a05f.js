@@ -1647,9 +1647,10 @@ class recipeView extends (0, _viewJsDefault.default) {
           
 
           <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
-          <svg>
-            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+
         </div>
           <button class="btn--round btn--bookmark">
             <svg class="">
@@ -1676,9 +1677,10 @@ ${this._data.ingredients?.filter((ing)=>ing && ing.description).map((ing)=>{
             }
             return `
       <li class="recipe__ingredient">
-        <svg class="recipe__icon">
-          <use href="${0, _iconsSvgDefault.default}#icon-check"></use>
-        </svg>
+       <svg  class="recipe__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+
         <div class="recipe__quantity">${quantity}</div>
         <div class="recipe__description">
           <span class="recipe__unit">${ing.unit ?? ''}</span>
@@ -1769,9 +1771,12 @@ class view {
         this._clear();
         const spanner = `
         <div class="spinner">
-            <svg>
-              <use href="${(0, _iconsSvgDefault.default)}#icon-loader"></use>
-            </svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+</svg>
+
+
+
           </div> 
       `;
         this._parentElement.innerHTML = '';
@@ -1825,9 +1830,10 @@ class resultView extends (0, _viewJsDefault.default) {
                 
               </div>
                <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
-          <svg>
-            <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+
         </div>
             </a>
            
@@ -1867,39 +1873,76 @@ var _viewJs = require("./view.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 var _iconsSvg = require("url:../../img/icons.svg");
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
-class bookmarkView extends (0, _viewJsDefault.default) {
+class BookmarkView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector('.bookmarks__list');
-    _errorMessage = 'no any bookmark found here!!!!';
-    _returnHtml() {
-        return this._data.map(this._returnHtmlPreview).join('');
+    _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark it :)';
+    _mobileBookmarksElement = document.querySelector('.sidebar .bookmarks__list');
+    // Initialize bookmark functionality
+    init() {
+        this._addHandlerBookmarks();
+    }
+    // Render bookmarks in both desktop and mobile views
+    render(data) {
+        this._data = data;
+        const markup = this._generateMarkup();
+        this._clear();
+        if (this._parentElement) this._parentElement.insertAdjacentHTML('afterbegin', markup);
+        if (this._mobileBookmarksElement) this._mobileBookmarksElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    _clear() {
+        if (this._parentElement) this._parentElement.innerHTML = '';
+        if (this._mobileBookmarksElement) this._mobileBookmarksElement.innerHTML = '';
+    }
+    // Improved event handling
+    _addHandlerBookmarks() {
+        document.addEventListener('click', (e)=>{
+            const bookmarkBtn = e.target.closest('.nav__btn--bookmarks');
+            if (!bookmarkBtn) return;
+            e.preventDefault();
+            e.stopPropagation(); // Prevent other handlers from interfering
+            const bookmarksPanel = bookmarkBtn.closest('.nav__item').querySelector('.bookmarks');
+            if (bookmarksPanel) {
+                // Toggle visibility
+                const isHidden = bookmarksPanel.classList.contains('hidden');
+                // Hide all other bookmark panels first
+                document.querySelectorAll('.bookmarks').forEach((panel)=>{
+                    panel.classList.add('hidden');
+                });
+                // Toggle current panel
+                if (isHidden) bookmarksPanel.classList.remove('hidden');
+                else bookmarksPanel.classList.add('hidden');
+            }
+        });
+    }
+    _generateMarkup() {
+        return this._data.map((bookmark)=>this._returnHtmlPreview(bookmark)).join('');
     }
     _returnHtmlPreview(result) {
         return `
-   <li class="preview">
-               <a class="preview__link" href="#${result.id}">
-                 <figure class="preview__fig">
-                   <img src="${result.image}" alt="Test" />
-                 </figure>
-                 <div class="preview__data">
-                   <h4 class="preview__title">${result.title}</h4>
-                   <p class="preview__publisher">${result.publisher}</p>
-                   
-                 </div>
+      <li class="preview">
+        <a class="preview__link preview__link--bookmark" href="#${result.id}">
+          <figure class="preview__fig">
+            <img src="${result.image}" alt="${result.title}" />
+          </figure>
+          <div class="preview__data">
+            <h4 class="preview__title">${result.title}</h4>
+            <p class="preview__publisher">${result.publisher}</p>
+            <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
+           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
 
-                       </div>
-                                <div class="preview__user-generated ${result.key ? '' : 'hidden'}">
-                           <svg>
-                             <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-                           </svg>
-                         </div>
-               </a>
-             </li>
+
+            </div>
+          </div>
+        </a>
+      </li>
     `;
     }
 }
-exports.default = new bookmarkView();
+exports.default = new BookmarkView();
 
-},{"./view.js":"2kjY2","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","url:../../img/icons.svg":"fd0vu"}],"8AWnP":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./view.js":"2kjY2","url:../../img/icons.svg":"fd0vu"}],"8AWnP":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./view.js");
@@ -1911,7 +1954,7 @@ class addRecipeView extends (0, _viewJsDefault.default) {
     _overlay = document.querySelector('.overlay');
     _window = document.querySelector('.add-recipe-window');
     _btnClose = document.querySelector('.btn--close-modal');
-    _btnOpen = document.querySelector('.nav__btn--add-recipe');
+    _btnOpen = document.querySelectorAll('.nav__btn--add-recipe');
     _message = 'recipe uploded succesful';
     constructor(){
         super();

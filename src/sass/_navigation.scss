@@ -1,20 +1,35 @@
 .nav{
  
+
+    
+      @media only screen and (max-width: $bp-medium2) {
+        
+ padding: 30px;
+ padding-left: 30px;
+ 
+
+ }
 .sidebar{
     display: none;
     flex-direction: column;
     list-style: none;
     gap: 25px;
     background-color: cadetblue;
-    padding: 60px;
+    padding: 40px;
+    z-index: 100;
+  
+  
     
       @media only screen and (max-width: $bp-medium2) {
         .sidebar{
  display:none;
  flex-direction: column;
  
+ 
 
  }
+
+
 
 }
 

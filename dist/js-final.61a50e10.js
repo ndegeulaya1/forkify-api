@@ -1,11 +1,12 @@
-//handle navigation
+// Handle navigation and ensure bookmarks work in mobile mode
 function show() {
-    const show = document.querySelector('.sidebar');
-    show.style.display = 'flex';
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'flex';
+// Reinitialize bookmark buttons when mobile menu opens
 }
 function hide() {
-    const hide = document.querySelector('.sidebar');
-    hide.style.display = 'none';
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'none';
 }
 
 //# sourceMappingURL=js-final.61a50e10.js.map

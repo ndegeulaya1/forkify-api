@@ -4,11 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 10px;
        @media only screen and (max-width: $bp-medium2) {
     
 margin-top: 10px;
 
 }
+
 
   &__logo {
     margin-left: 4rem;
@@ -26,12 +28,14 @@ margin-top: 10px;
   background-color: #fff;
   border-radius: 10rem;
   display: flex;
+  
   align-items: center;
   padding-left: 3rem;
   transition: all 0.3s;
 
    @media only screen and (max-width: $bp-smallest) {
- margin: 10px;
+
+  padding-left: 10px
 
    }
 
@@ -54,6 +58,11 @@ margin-top: 10px;
  width: 10px;
 
    }
+   @media(max-width:400px){
+  font-size: 10px;
+
+  
+  }
 
     &:focus {
       outline: none;
@@ -75,12 +84,21 @@ margin-top: 10px;
   &__btn {
     font-weight: 600;
     font-family: inherit;
+
+     @media(max-width:400px){
+    font-weight: 100;
+    width: 90px;
+    font-size: 10px;
+    
+  
+  }
+    
   }
 }
 
 .nav {
   align-self: stretch;
-  margin-right: 2.5rem;
+
 
   &__list {
     list-style: none;

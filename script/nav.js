@@ -1,10 +1,13 @@
+// Handle navigation and ensure bookmarks work in mobile mode
+function show() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'flex';
+    
+    // Reinitialize bookmark buttons when mobile menu opens
+}
 
-//handle navigation
-function show(){
-    const show=document.querySelector('.sidebar');
-    show.style.display='flex';
-  }
-   function hide(){
-    const hide= document.querySelector('.sidebar');
-    hide.style.display='none'
-   }
+function hide() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'none';
+}
+

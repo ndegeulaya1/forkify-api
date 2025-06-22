@@ -18,6 +18,11 @@
     &--active {
       background-color: $color-grey-light-1;
     }
+
+      @media(max-width:430px){
+  
+     padding: 10.5rem 3.25rem;
+  }
   }
 
   &__fig {
@@ -42,7 +47,7 @@
         $color-grad-1,
         $color-grad-2
       );
-      opacity: 0.4;
+      opacity: 0.1;
     }
 
     img {
