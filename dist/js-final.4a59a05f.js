@@ -757,8 +757,7 @@ const controlAddRecipe = async function(newRecipe) {
         }, (0, _configJs.MODAL_CLOSE_SEC) * 400);
         window.history.pushState(null, '', `${_modelJs.state.recipe.id}`);
     } catch (err1) {
-        (0, _addRecipeViewJsDefault.default).handdleError(err1.message);
-        (0, _addRecipeViewJsDefault.default)._clear();
+    //addRecipeView.handdleError(err.message);
     }
 };
 const init = function() {
@@ -1768,6 +1767,7 @@ class view {
               <p>${message}</p>
             </div> 
           `;
+        this._clear();
         this._parentElement.innerHTML = '';
         this._parentElement.insertAdjacentHTML('afterbegin', errorHTML);
     }
@@ -1797,7 +1797,7 @@ class view {
         <p>${message}</p>
       </div>
     `;
-        this._clear();
+        this._parentElement.innerHTML = '';
         this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
 }
@@ -1965,6 +1965,13 @@ class addRecipeView extends (0, _viewJsDefault.default) {
         this._btnOpen = document.querySelectorAll('.nav__btn--add-recipe');
         this._addHandleShow();
         this._addHandleHide();
+    }
+    clearForm() {
+        this._parentElement.reset();
+    }
+    clearMessages() {
+        const messages = this._parentElement.querySelectorAll('.message, .error');
+        messages.forEach((msg)=>msg.remove());
     }
     toogleWindow() {
         this._window.classList.toggle('hidden');

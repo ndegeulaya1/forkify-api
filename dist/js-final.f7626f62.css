@@ -459,10 +459,9 @@ body {
   right: 70px;
 }
 
-@media (width <= 816px) {
-  .hide-mobile {
-    display: none;
-  }
+.sidebar-btn {
+  border-radius: 20px;
+  padding: 10px 20px;
 }
 
 .preview__link:link, .preview__link:visited {
@@ -920,7 +919,13 @@ body {
 
 .upload__btn {
   grid-column: 1 / -1;
-  justify-self: left;
+  justify-self: center;
+}
+
+@media (width <= 816px) {
+  .upload__btn {
+    justify-self: left;
+  }
 }
 
 @media only screen and (width <= 47em) {

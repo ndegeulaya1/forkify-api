@@ -131,6 +131,10 @@ width: 200px;
 
   &__btn {
     grid-column: 1 / -1;
-    justify-self: left;
+    justify-self: center;
+          @media(max-width:816px){
+  justify-self: left;
+  
+  }
   }
 }

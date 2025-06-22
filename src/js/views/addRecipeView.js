@@ -18,23 +18,35 @@ constructor(){
     this._addHandleHide();
 }
 
+clearForm() {
+  this._parentElement.reset();
+}
+
+clearMessages() {
+  const messages = this._parentElement.querySelectorAll('.message, .error');
+  messages.forEach(msg => msg.remove());
+}
 
       
 
 toogleWindow(){
-   
+ 
 this._window.classList.toggle('hidden');
        this._overlay.classList.toggle('hidden');
+        
       
 }
 _addHandleShow() {
+  
   this._btnOpen.forEach(btn =>
     btn.addEventListener('click', this.toogleWindow.bind(this))
   );
+    
 }
 
 
 _addHandleHide(){
+ 
     this._btnClose.addEventListener('click',this.toogleWindow.bind(this))
 }
 

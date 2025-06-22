@@ -129,7 +129,9 @@ const controlAddRecipe =async function(newRecipe){
 
    //succesfull message
     
-  //addRecipeView.renderMessage();
+//addRecipeView.renderMessage();
+
+
 
 
   //rende spiner 
@@ -151,8 +153,8 @@ const controlAddRecipe =async function(newRecipe){
 
 catch(err){
 
-  addRecipeView.handdleError(err.message);
-addRecipeView._clear();
+  //addRecipeView.handdleError(err.message);
+
 }
 
 
@@ -171,6 +173,7 @@ addRecipeView._clear();
  
      
   bookmarkView.render(model.state.bookmarks);
+
 
 
  

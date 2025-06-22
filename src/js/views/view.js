@@ -67,6 +67,7 @@ export default class view {
               <p>${message}</p>
             </div> 
           `
+           this._clear();
           this._parentElement.innerHTML='';
           this._parentElement.insertAdjacentHTML('afterbegin',errorHTML);
       };
@@ -101,7 +102,7 @@ export default class view {
         <p>${message}</p>
       </div>
     `;
-    this._clear();
+    this._parentElement.innerHTML='';
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
 
 
