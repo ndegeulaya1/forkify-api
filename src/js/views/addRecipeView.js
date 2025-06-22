@@ -7,7 +7,7 @@ _parentElement = document.querySelector('.upload');
 _overlay = document.querySelector('.overlay');
 _window = document.querySelector('.add-recipe-window');
 _btnClose = document.querySelector('.btn--close-modal');
-_btnOpen = document.querySelector('.nav__btn--add-recipe');
+_btnOpen = document.querySelectorAll('.nav__btn--add-recipe');
 _message ='recipe uploded succesful'
 
 
