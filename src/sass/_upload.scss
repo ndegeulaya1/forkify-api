@@ -13,7 +13,7 @@
   transition: all 0.5s;
    @media(max-width:800px){
   width: 300px;
-  height: 990px;
+  height: 490px;
   }
 
   .btn--close-modal {
@@ -52,29 +52,43 @@
   gap: 4rem 6rem;
 
     @media(max-width:800px){
-width: 300px;
+width: 400px;
     grid-template-columns: 1fr;
-      gap: 1rem 1rem;
+      gap:10px
   }
 
 
-  &__column {
+  &__column:first-child {
     display: grid;
     grid-template-columns: 1fr 2.8fr;
     align-items: center;
     gap: 1.5rem;
 
     @media(max-width:816px){
-  gap: 10px;
+ 
    grid-template-columns: 1fr;
+   gap: 1px;
   
   }
+
+   &__column:last-child{
+   @media(max-width:816px){
+ 
+   grid-template-columns: 1fr;
+   gap: 1px;
+  
+  }
+   }
 
 
     & label {
       font-size: 1.5rem;
       font-weight: 600;
       color: inherit;
+         @media(max-width:816px){
+ 
+   font-size: 13px;
+  }
     }
 
     & input {
@@ -117,6 +131,6 @@ width: 200px;
 
   &__btn {
     grid-column: 1 / -1;
-    justify-self: center;
+    justify-self: left;
   }
 }

@@ -76,7 +76,7 @@ margin-top: 10px;
       width: auto;
 
       &::placeholder {
-        color: white;
+        color: rgb(94, 85, 85);
       }
     }
   }
@@ -186,5 +186,22 @@ margin-top: 10px;
   .nav__btn--bookmarks:hover + & {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+
+.bookRecipe{
+  padding: 10px;
+ width: 10px;
+  right: 70px;
+ font-weight: 700;
+ font-size: 15px;
+
+}
+
+
+   @media(max-width:816px){
+ .hide-mobile{
+  display: none;
   }
 }

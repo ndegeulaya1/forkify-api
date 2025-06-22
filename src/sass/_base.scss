@@ -82,10 +82,8 @@ body {
 }
 
 
-.copyright{
-  @media only screen and (max-width: $bp-medium2) {
+   @media(max-width:816px){
+ .hide-mobile{
   display: none;
-
   }
-
 }

@@ -58,8 +58,10 @@ body {
     flex-direction: column;
     display: flex;
   }
+}
 
-  .copyright {
+@media (width <= 816px) {
+  .hide-mobile {
     display: none;
   }
 }
@@ -345,7 +347,7 @@ body {
   }
 
   .search__field::placeholder {
-    color: #fff;
+    color: #5e5555;
   }
 }
 
@@ -447,6 +449,20 @@ body {
 .bookmarks:hover, .nav__btn--bookmarks:hover + .bookmarks {
   visibility: visible;
   opacity: 1;
+}
+
+.bookRecipe {
+  width: 10px;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  right: 70px;
+}
+
+@media (width <= 816px) {
+  .hide-mobile {
+    display: none;
+  }
 }
 
 .preview__link:link, .preview__link:visited {
@@ -786,7 +802,7 @@ body {
 @media (width <= 800px) {
   .add-recipe-window {
     width: 300px;
-    height: 990px;
+    height: 490px;
   }
 }
 
@@ -828,12 +844,12 @@ body {
 @media (width <= 800px) {
   .upload {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    width: 300px;
+    gap: 10px;
+    width: 400px;
   }
 }
 
-.upload__column {
+.upload__column:first-child {
   grid-template-columns: 1fr 2.8fr;
   align-items: center;
   gap: 1.5rem;
@@ -841,19 +857,30 @@ body {
 }
 
 @media (width <= 816px) {
-  .upload__column {
+  .upload__column:first-child {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 1px;
+  }
+
+  .upload__column:first-child__column:last-child {
+    grid-template-columns: 1fr;
+    gap: 1px;
   }
 }
 
-.upload__column label {
+.upload__column:first-child label {
   color: inherit;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.upload__column input {
+@media (width <= 816px) {
+  .upload__column:first-child label {
+    font-size: 13px;
+  }
+}
+
+.upload__column:first-child input {
   border: 1px solid #ddd;
   border-radius: .5rem;
   padding: .8rem 1rem;
@@ -862,22 +889,22 @@ body {
 }
 
 @media (width <= 816px) {
-  .upload__column input {
+  .upload__column:first-child input {
     width: 200px;
   }
 }
 
-.upload__column input::placeholder {
+.upload__column:first-child input::placeholder {
   color: #d3c7c3;
 }
 
-.upload__column input:focus {
+.upload__column:first-child input:focus {
   background-color: #f9f5f3;
   border: 1px solid #f38e82;
   outline: none;
 }
 
-.upload__column button {
+.upload__column:first-child button {
   grid-column: 1 / span 2;
   justify-self: center;
   margin-top: 1rem;
@@ -893,7 +920,7 @@ body {
 
 .upload__btn {
   grid-column: 1 / -1;
-  justify-self: center;
+  justify-self: left;
 }
 
 @media only screen and (width <= 47em) {
@@ -907,7 +934,7 @@ body {
   background-color: #5f9ea0;
   flex-direction: column;
   gap: 25px;
-  padding: 40px;
+  padding: 70px;
   list-style: none;
   display: none;
 }

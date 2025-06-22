@@ -113,6 +113,7 @@ const controlAddBookmark = function () {
 
   // 3) Render bookmarks
   bookmarkView.render(model.state.bookmarks);
+  bookmarkView.handdleError(err.message);
 };
 
 

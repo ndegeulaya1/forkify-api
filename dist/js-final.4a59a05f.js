@@ -701,9 +701,9 @@ const showRecipe = async function() {
         //render recipe
         (0, _recipeViewsJsDefault.default).render(_modelJs.state.recipe);
         (0, _bookmarkViewJsDefault.default).update(_modelJs.state.bookmarks);
-    } catch (err) {
-        console.error('Error:', err); // console.error is better for errors
-        throw err; // Re-throw if you want calling code to handle it
+    } catch (err1) {
+        console.error('Error:', err1); // console.error is better for errors
+        throw err1; // Re-throw if you want calling code to handle it
     }
 };
 //control search result
@@ -719,9 +719,9 @@ const controlSearchResult = async function() {
         await _modelJs.loadResult(query);
         //render the data 
         (0, _resultViewJsDefault.default).render(_modelJs.state.search.results);
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (err1) {
+        console.log(err1);
+        throw err1;
     }
 };
 const controlServings = function(newServings) {
@@ -739,6 +739,7 @@ const controlAddBookmark = function() {
     (0, _recipeViewsJsDefault.default).update(_modelJs.state.recipe);
     // 3) Render bookmarks
     (0, _bookmarkViewJsDefault.default).render(_modelJs.state.bookmarks);
+    (0, _bookmarkViewJsDefault.default).handdleError(err.message);
 };
 const controlAddRecipe = async function(newRecipe) {
     try {
@@ -755,8 +756,8 @@ const controlAddRecipe = async function(newRecipe) {
             (0, _addRecipeViewJsDefault.default).toogleWindow();
         }, (0, _configJs.MODAL_CLOSE_SEC) * 400);
         window.history.pushState(null, '', `${_modelJs.state.recipe.id}`);
-    } catch (err) {
-        (0, _addRecipeViewJsDefault.default).handdleError(err.message);
+    } catch (err1) {
+        (0, _addRecipeViewJsDefault.default).handdleError(err1.message);
         (0, _addRecipeViewJsDefault.default)._clear();
     }
 };
@@ -1653,10 +1654,11 @@ class recipeView extends (0, _viewJsDefault.default) {
 
         </div>
           <button class="btn--round btn--bookmark">
-            <svg class="">
-              <use href="${0, _iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? '-fill' : ''}"></use>
-            </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" fill="${this._data.bookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke-width="1.5" stroke="" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+</svg>
           </button>
+          <p class="bookRecipe">${this._data.bookmarked ? 'bookmaked' : ''}</p>
         </div>
 
         <div class="recipe__ingredients">l
